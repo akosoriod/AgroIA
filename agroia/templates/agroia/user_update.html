@@ -1,0 +1,66 @@
+{% extends 'agroia/main.html'%}
+{% load static %}
+{% block content%}
+
+  <div class="row">
+    <div class="center align">
+      <a href="{% url 'users' %}" style="margin: 10px;" title="Back" class="btn btn-floating  btn-large waves-effect waves-light ">
+        <i class="material-icons">keyboard_arrow_left</i>
+        </a>
+    </div>
+    <br>
+    {% if form.errors %}
+      <div class="col s8 offset-s2 m6 offset-m3 materialert error">
+        <div class="material-icons ">error_outline</div>
+              {{form.errors}}
+      </div>
+    {% endif %}
+    <div class="col s10 offset-s1 m8 offset-m2 ">
+      <div class="card">
+        <div class="card-content white-text">
+          <form action="" method='POST'>
+            {% csrf_token %}
+            <span class="card-title center-align">Edit {{person.username}}</span>
+            <div class="input-field col s12 m12 l12">
+              <i class="material-icons prefix">label</i>
+              <input name="first_name" id="first_name" type="text" class="validate" value="{{person.first_name}}">
+              <label for="first_name">First Name</label>
+            </div>
+            <div class="input-field col s12 m12 l12">
+              <i class="material-icons prefix">label</i>
+              <input name="last_name" id="last_name" type="text" class="validate" value="{{person.last_name}}">
+              <label for="last_name">Last Name</label>
+            </div>
+            <div class="input-field col s12 m12 l12">
+              <i class="material-icons prefix">account_circle</i>
+              <input name="username" id="username" type="text" class="validate" value="{{person.username}}" >
+              <label for="username">Username</label>
+            </div>
+            <div class="input-field col s12 m12 l12">
+              <i class="material-icons prefix">email</i>
+              <input name="email" id="email" type="text" class="validate" value="{{person.email}}">
+              <label for="email">Email</label>
+            </div>
+            <div class="input-field col s12 m12 l12">
+              <i class="material-icons prefix" style="left: 2%;">assignment_ind</i>
+               <select name="role" id="role" class="validate">
+                 <option value="Administrator" {% if person.groups.all.0.name == "Administrator" %} selected {% endif %}>Administrator</option>
+                 <option value="Agency" {% if person.groups.all.0.name == "Agency" %} selected {% endif %}>Agency</option>
+                 <option value="Executive" {% if person.groups.all.0.name == "Executive" %} selected {% endif %}>Executive</option>
+               </select>
+               <label for="role" >Role</label>
+             </div>
+             <br>
+             <br>
+        <div class="center-align">
+          <button class="btn waves-effect waves-light" type="submit" name="action">Enviar
+            <i class="material-icons right">send</i>
+          </button>
+          </div>
+      </form>
+     </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

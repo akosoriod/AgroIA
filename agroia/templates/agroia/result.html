@@ -1,0 +1,36 @@
+{% extends 'agroia/main.html'%}
+{% load static %}
+{% block content%}
+
+{% if messages %}
+  {% for message in messages %}
+  <div class="col s8 offset-s2 m6 offset-m3 materialert {{message.tags}}">
+      <div class="material-icons">{{message.tags}}_outline</div>
+      {{message}}
+  </div>
+  {% endfor%}
+{% endif %}
+
+  <div class="row">
+    <div class="center align">
+      <a href="{% url 'dashboard' %}" style="margin: 10px;" title="Back" class="btn btn-floating  btn-large waves-effect waves-light ">
+        <i class="material-icons">keyboard_arrow_left</i>
+        </a>
+    </div>
+    <br>
+
+    <div class="col s10 offset-s1 m8 offset-m2 ">
+      <div class="card">
+        <div class="card-content white-text">
+            <span class="card-title center-align">Results </span>
+              <h1>{{item.title}}</h1>
+              <img src="{{item.image.url}}" width="400" height="400">
+            <h2>{{item.method}}</h2>
+      </div>
+    </div>
+  </div>
+
+   <script>
+
+   </script>
+{% endblock %}

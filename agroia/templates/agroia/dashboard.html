@@ -1,0 +1,78 @@
+{% extends 'agroia/main.html'%}
+{% load static %}
+{% block content%}
+<div class="row">
+  <div class="col m4 s12">
+      <!-- Promo Content 2 goes here -->
+      <div class="card ">
+          <div class="card center">
+          <i class="large material-icons" style="color: orange; padding-bottom: 0px !important;">account_circle</i>
+          <h5 class="lbl-profile white-text">{{request.user}}</h5>
+          </div>
+          <div style="padding: 10px">
+          <h8 class="lbl-profile">Name:</h8>
+          <p class="center" style="padding: 0px;margin:5px;">{{ user.get_full_name }}</p>
+          <h8 class="lbl-profile">Role:</h8>
+          <p class="center" style="padding: 0px;margin:5px;">{{ user.groups.all.0 }}</p>
+          <h8 class="lbl-profile">Email:</h8>
+          <p class="center" style="padding: 0px;margin:5px;">{{ user.email }}</p>
+          <h8 class="lbl-profile">Last login:</h8>
+          <p class="center" style="padding: 0px;margin:5px;">{{ user.last_login }}</p>
+          </div>
+      </div>
+  </div>
+
+  <div class="col m8 s12">
+    <br><br>
+    <div class="row">
+      <div class="col m6 s12">
+        <a class="" href="{% url 'estimate' %}" title="estimate">
+        <div class="card">
+          <div class="row">
+            <div class="center col m4">
+              <i class="large  material-icons white-text">library_add</i>
+            </div>
+            <div class="col s8 ">
+              <p class="ctitle activator white-text center-align">New estimate</p>
+            </div>
+          </div>
+        </div>
+        </a>
+      </div>
+      <div class="col m6 s12">
+        <a class="" href="{% url 'files' %}" title="files">
+        <div class="card">
+          <div class="row">
+            <div class="center col m4">
+              <i class="large  material-icons white-text">library_books</i>
+            </div>
+            <div class="col m8 ">
+              <p class="ctitle activator white-text center-align">My files</p>
+            </div>
+          </div>
+        </div>
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col offset-m3 m6 m6 s12">
+        <a class="" href="{% url 'method' %}" title="method">
+        <div class="card">
+          <div class="row">
+            <div class="center col m4">
+              <i class="large  material-icons white-text" >laptop_chromebook</i>
+            </div>
+            <div class="col m8 ">
+              <p class="ctitle white-text center-align ">Add new method</p>
+            </div>
+          </div>
+        </div>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

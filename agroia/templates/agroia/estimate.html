@@ -1,0 +1,88 @@
+{% extends 'agroia/main.html'%}
+{% load static %}
+{% block content%}
+
+{% if messages %}
+  {% for message in messages %}
+  <div class="col s8 offset-s2 m6 offset-m3 materialert {{message.tags}}">
+      <div class="material-icons">{{message.tags}}_outline</div>
+      {{message}}
+  </div>
+  {% endfor%}
+{% endif %}
+  <div class="row">
+    <div class="center align">
+      <a href="{% url 'dashboard' %}" style="margin: 10px;" title="Back" class="btn btn-floating  btn-large waves-effect waves-light ">
+        <i class="material-icons">keyboard_arrow_left</i>
+        </a>
+    </div>
+    <br>
+    {% if form.errors %}
+      <div class="col s8 offset-s2 m6 offset-m3 materialert error">
+        <div class="material-icons ">error_outline</div>
+              {{form.errors}}
+      </div>
+    {% endif %}
+    <div class="col s10 offset-s1 m8 offset-m2 ">
+      <div class="card">
+        <div class="card-content white-text">
+          <form action="" method='POST' enctype="multipart/form-data">
+            {% csrf_token %}
+            <span class="card-title center-align">Upload your image </span>
+            <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">call_to_action</i>
+              <input name="title" id="title" maxlength="99" type="text" class="validate" class="" required></input>
+              <label for="title">Title</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">border_color</i>
+              <textarea name="detail" id="detail_id" maxlength="499" type="text" class="validate" class="materialize-textarea" required></textarea>
+              <label for="detail_id">Detail</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="file-field input-field col s12">
+              <div >
+                <i class="material-icons prefix">photo</i>
+              </div>
+              <div style="margin-left:50px !important;">
+                <div class="file-path-wrapper" style="padding: 0px !important;  margin: 0px !important;">
+                <input type="file" name="image" id="image_id" class="validate" accept="image/*" required>
+                    <label for="image_id">Image</label>
+                  <input class="file-path validate"  style="padding: 0px !important;  margin: 0px !important;" type="text">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m12 l12">
+              <i class="material-icons prefix" style="left: 2%;">playlist_play</i>
+               <select name="method" id="method" class="validate">
+                    <option value="" selected>Select a method</option>
+                   {% for method in methods %}
+                 <option value="{{method.id}}" selected>{{method.title}}</option>
+                 {% endfor%}
+                </select>
+               <label for="role" >Role</label>
+             </div>
+          </div>
+             <br>
+        <div class="center-align">
+          <button class="btn waves-effect waves-light" type="submit" name="action">Enviar
+            <i class="material-icons right">send</i>
+          </button>
+          </div>
+      </form>
+     </div>
+      </div>
+    </div>
+  </div>
+
+   <script>
+     $('#textarea1').val('New Text');
+       M.textareaAutoResize($('#textarea1'));
+   </script>
+{% endblock %}

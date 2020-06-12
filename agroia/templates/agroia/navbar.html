@@ -1,0 +1,29 @@
+{% load static %}
+{% block content%}
+<nav>
+    <div class="container nav-wrapper">
+        <a href="/" class="brand-logo"><img src="{% static "img/logo-NH.png" %}" alt="NH-Reports" title="NH" class="logo" itemprop="logo"></a>
+
+        <ul id="nav-mobile" class="right">
+            {% if user.is_authenticated %}
+              {% if user.groups.all.0.name == "Administrator" %}
+                  <li>
+                      <a class="" href="{% url 'users' %}" title="Users">
+                        <span>Users</span>
+                        <i class="material-icons logout" style="color: white">people</i>
+                      </a>
+                </li>
+              {% endif %}
+              <li>
+                  <a class="" href="{% url 'logout' %}" title="Logout">
+                    <span>Logout</span>
+                    <i class="material-icons logout" style="color: white">exit_to_app</i>
+                  </a>
+            </li>
+            {% else %}
+
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+{% endblock %}
