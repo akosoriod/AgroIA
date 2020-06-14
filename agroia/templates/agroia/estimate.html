@@ -39,7 +39,7 @@
           <div class="row">
             <div class="input-field col s12">
               <i class="material-icons prefix">border_color</i>
-              <textarea name="detail" id="detail_id" maxlength="499" type="text" class="validate" class="materialize-textarea" required></textarea>
+              <textarea name="detail" style="height: 78px; color: white;" id="detail_id" maxlength="499" type="text" class="validate" class="materialize-textarea" required></textarea>
               <label for="detail_id">Detail</label>
             </div>
           </div>
@@ -60,10 +60,10 @@
           <div class="row">
             <div class="input-field col s12 m12 l12">
               <i class="material-icons prefix" style="left: 2%;">playlist_play</i>
-               <select name="method" id="method" class="validate">
+               <select name="met" id="met" class="validate">
                     <option value="" selected>Select a method</option>
-                   {% for method in methods %}
-                 <option value="{{method.id}}" selected>{{method.title}}</option>
+                   {% for mt in methods %}
+                 <option value="{{mt.id}}" selected>{{mt.title}}</option>
                  {% endfor%}
                 </select>
                <label for="role" >Role</label>
@@ -82,7 +82,7 @@
   </div>
 
    <script>
-     $('#textarea1').val('New Text');
-       M.textareaAutoResize($('#textarea1'));
+     $('#detail_id').val('New Text');
+       M.textareaAutoResize($('#detail_id'));
    </script>
 {% endblock %}

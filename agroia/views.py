@@ -8,6 +8,7 @@ from django.contrib import messages
 from .forms import *
 from .decorators import *
 from .models import *
+import zipfile
 
 @unauthentucated_user
 def home(request):
@@ -93,10 +94,11 @@ def estimate(request):
     if request.method == "POST":
         form = ItemForm(request.POST, request.FILES)
         if form.is_valid():
-            item = form.save()
-            item.create_by=request.user.id
-            id_method = form.cleaned_data.get('method')
-            item.method= id_method
+            item = form.save(commit=False)
+            item.image.name=form.cleaned_data.get('title')
+            item.create_by=request.user
+            id_method = form.cleaned_data.get('met')
+            item.method = Method.objects.get(id=id_method)
             item.save()
             pk = item.id
             return redirect('result',pk)
@@ -109,7 +111,7 @@ def result(request,pk_t):
     try:
         item = Item.objects.get(id = pk_t)
     except:
-        messages.error(request, 'No results found')
+        messages.error(request, 'Item not found')
     context = {'item':item}
     return render(request,'agroia/result.html',context)
 
@@ -122,5 +124,29 @@ def files(request):
 
 @login_required(login_url='index')
 def method(request):
-    context = {}
+    form = MethodForm()
+    if request.method == "POST":
+        form = MethodForm(request.POST, request.FILES)
+        if form.is_valid():
+            item = form.save(commit=False)
+            item.image.name=form.cleaned_data.get('title')
+            item.create_by=request.user
+            id_method = form.cleaned_data.get('met')
+            item.method = Method.objects.get(id=id_method)
+            item.save()
+            pk = item.id
+            return redirect('result',pk)
+    methods = Method.objects.all()
+    context = {'form':form,'methods':methods}
     return render(request,'agroia/method.html',context)
+
+    def unzip(file):
+        zipfilename = "example.zip"
+        password = None
+        z = zipfile.ZipFile(zipfilename, "r")
+        try:
+            z.extractall(pwd=password)
+        except:
+            print('Error')
+            pass
+        zf.close()

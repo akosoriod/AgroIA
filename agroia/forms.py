@@ -21,13 +21,14 @@ class UserChangeForm(UserChangeForm):
 class ItemForm(forms.ModelForm):
     title = forms.CharField(max_length=99)
     detail = forms.CharField(max_length=499)
-    method = forms.IntegerField()
+    met = forms.IntegerField()
     class Meta:
         model = Item
-        fields = ['title','detail','image','method']
+        fields = ['title','detail','image','met']
+
 class MethodForm(forms.ModelForm):
     title = forms.CharField(max_length=99)
     detail = forms.CharField(max_length=499)
     class Meta:
         model = Method
-        fields = ['title','detail','weights','script']
+        fields = ['title','detail','zip','command']
