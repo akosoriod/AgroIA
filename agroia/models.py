@@ -8,7 +8,7 @@ class Method(models.Model):
     upload_by = models.ForeignKey(User,on_delete=models.CASCADE, default=1)
     date_upload = models.DateField(default = timezone.now)
     command = models.CharField(max_length=500, default="python")
-    zip = models.FileField(upload_to="methods", null=True)
+    file = models.FileField(upload_to="methods", null=True)
     def __str__(self):
         return '{}'.format(self.title)
 

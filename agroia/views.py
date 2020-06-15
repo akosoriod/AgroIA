@@ -8,7 +8,9 @@ from django.contrib import messages
 from .forms import *
 from .decorators import *
 from .models import *
-import zipfile
+
+
+
 
 @unauthentucated_user
 def home(request):
@@ -96,7 +98,7 @@ def estimate(request):
         if form.is_valid():
             item = form.save(commit=False)
             item.image.name=form.cleaned_data.get('title')
-            item.create_by=request.user
+            item.upload_by=request.user
             id_method = form.cleaned_data.get('met')
             item.method = Method.objects.get(id=id_method)
             item.save()
@@ -128,25 +130,12 @@ def method(request):
     if request.method == "POST":
         form = MethodForm(request.POST, request.FILES)
         if form.is_valid():
-            item = form.save(commit=False)
-            item.image.name=form.cleaned_data.get('title')
-            item.create_by=request.user
-            id_method = form.cleaned_data.get('met')
-            item.method = Method.objects.get(id=id_method)
-            item.save()
-            pk = item.id
-            return redirect('result',pk)
-    methods = Method.objects.all()
-    context = {'form':form,'methods':methods}
+            method = form.save(commit=False)
+            title = form.cleaned_data.get('title').replace(" ", "_")
+            method.file.name = title
+            method.upload_by = request.user
+            method.save()
+            listado = form.process_file(title)
+            messages.info(request, 'Method ' + title + " was created succesfully")
+    context = {'form':form}
     return render(request,'agroia/method.html',context)
-
-    def unzip(file):
-        zipfilename = "example.zip"
-        password = None
-        z = zipfile.ZipFile(zipfilename, "r")
-        try:
-            z.extractall(pwd=password)
-        except:
-            print('Error')
-            pass
-        zf.close()
