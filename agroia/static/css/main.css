@@ -126,7 +126,7 @@ main {
   }
   img.logoName {
       position: relative;
-      left: -20px;
+      left: -30%;
       top: -10px;
       height: 37px !important;
       width: 116px !important;
