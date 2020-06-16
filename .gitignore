@@ -1,6 +1,5 @@
 # exclude everything from media
 media/*
-
+/agroIA/settings.py
 # exception to the rule
 !media/.gitkeep
-
