@@ -1,1 +1,6 @@
+# exclude everything from media
 media/*
+
+# exception to the rule
+!media/.gitkeep
+
