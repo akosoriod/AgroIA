@@ -108,7 +108,7 @@ def estimate(request):
             method=Method.objects.get(id=id_method)
             item.method = method
             item.save()
-            os.system('cd ./media/methods/'+method.title+"_Folder/" +' && '
+            os.system('cd ./media/methods/'+method.title.replace(" ", "_")+"_Folder/" +' && '
             + method.command +' ../../..'+item.image.url +' && '
             + 'cp result.jpg '+'../../..'+item.image.url+'_Result.jpg && '
             + 'cp result.txt '+'../../..'+item.image.url+'_Result.txt '
