@@ -124,14 +124,13 @@ def estimate(request):
 
 @login_required(login_url='index')
 def result(request,pk_t):
-    #try:
-    item = Item.objects.get(id = pk_t)
-    #f = open(item.txt_result, 'r')
-    f = open('media/crops/Lettuces_Result.txt', 'r')
-    txt_result = f.read()
-    f.close()
-    #except:
-    #    return HttpResponse('<h1>Item not found</h1>')
+    try:
+        item = Item.objects.get(id = pk_t)
+        f = open('.'+item.txt_result, 'r')
+        txt_result = f.read()
+        f.close()
+    except:
+        return HttpResponse('<h1>Item not found</h1>')
     context = {'item':item,'txt_result':txt_result}
     return render(request,'agroia/result.html',context)
 
