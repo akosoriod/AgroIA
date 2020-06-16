@@ -106,13 +106,13 @@
             </div>
             <div class="input-field col s12 m12 l12">
               <i class="material-icons prefix">assignment_ind</i>
-               <select name="role" id="role" class="validate">
-                 <option value="" disabled selected>Choose the role</option>
-                 <option value="Administrator">Administrator</option>
-                 <option value="Agency">Agency</option>
-                 <option value="Executive">Executive</option>
+               <select name="rol" id="rol" class="validate">
+                 <option value="" selected>Select a role</option>
+                  {% for item in roles %}
+                  <option value='{{item.name}}' {% if person.groups.all.0.name == item.name %} selected {% endif %}>{{item.name}}</option>
+                {% endfor%}
                </select>
-               <label for="role" >Role</label>
+               <label for="rol" >Role</label>
              </div>
              <div class="input-field col s12 m12 l12">
                <i class="material-icons prefix">vpn_key</i>

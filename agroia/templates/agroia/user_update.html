@@ -43,12 +43,13 @@
             </div>
             <div class="input-field col s12 m12 l12">
               <i class="material-icons prefix" style="left: 2%;">assignment_ind</i>
-               <select name="role" id="role" class="validate">
-                 <option value="Administrator" {% if person.groups.all.0.name == "Administrator" %} selected {% endif %}>Administrator</option>
-                 <option value="Agency" {% if person.groups.all.0.name == "Agency" %} selected {% endif %}>Agency</option>
-                 <option value="Executive" {% if person.groups.all.0.name == "Executive" %} selected {% endif %}>Executive</option>
+               <select name="rol" id="rol" class="validate">
+                <option value="" selected>Select a role</option>
+                 {% for item in roles %}
+                 <option value='{{item.name}}' {% if person.groups.all.0.name == item.name %} selected {% endif %}>{{item.name}}</option>
+               {% endfor%}
                </select>
-               <label for="role" >Role</label>
+               <label for="rol" >Role</label>
              </div>
              <br>
              <br>

@@ -3,8 +3,15 @@ nav {
 }
 img.logo {
     position: relative;
-    top: 2px;
+    height: 80px !important;
     left: 10px;
+    z-index: 3;
+}
+img.logoName {
+    position: relative;
+    left: 10px;
+    top: -18px;
+    height: 45px;
     z-index: 3;
 }
 footer {

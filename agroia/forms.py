@@ -6,18 +6,16 @@ from .models import *
 from zipfile import ZipFile, BadZipfile
 from django.conf import settings, os
 class CreateUserForm(UserCreationForm):
-    CHOICES = (('', 'Choose the role'),('Administrator','Administrator'),('Agency','Agency'),('Executive', 'Executive'))
-    role = forms.ChoiceField(choices=CHOICES)
+    rol = forms.CharField()
     class Meta:
         model = User
-        fields = ['first_name','last_name','username','role','email','password1','password2']
+        fields = ['first_name','last_name','username','rol','email','password1','password2']
 
 class UserChangeForm(UserChangeForm):
-    CHOICES = (('', 'Choose the role'),('Administrator','Administrator'),('Agency','Agency'),('Executive', 'Executive'))
-    role = forms.ChoiceField(choices=CHOICES)
+    rol = forms.CharField()
     class Meta:
         model = User
-        fields = ['first_name','last_name','username','role','email']
+        fields = ['first_name','last_name','username','rol','email']
 
 class ItemForm(forms.ModelForm):
     title = forms.CharField(max_length=99)

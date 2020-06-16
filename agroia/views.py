@@ -44,13 +44,14 @@ def users(request):
         if form.is_valid():
             user = form.save()
             username = form.cleaned_data.get('username')
-            role = form.cleaned_data.get('role')
+            role = form.cleaned_data.get('rol')
             group = Group.objects.get(name=role)
             user.groups.add(group)
             messages.info(request, 'Acconunt was created for ' + username )
             return redirect('users')
     users = User.objects.exclude(username=request.user.username).exclude(is_superuser=True)
-    context = {'users':users,'form':form}
+    roles = Group.objects.all()
+    context = {'users':users,'roles':roles,'form':form}
     return render(request, 'agroia/users.html',context)
 
 
@@ -61,7 +62,8 @@ def user_update(request,pk_t):
         person = User.objects.exclude(is_superuser=True).get(id = pk_t)
         if request.method == "GET":
             form = UserChangeForm(instance = person)
-            context = {'person':person,'form':form}
+            roles = Group.objects.all()
+            context = {'person':person,'roles':roles,'form':form}
             return render(request, 'agroia/user_update.html',context)
         else:
             form = UserChangeForm(request.POST, instance = person)
@@ -69,8 +71,11 @@ def user_update(request,pk_t):
                 oldGroup = person.groups.all()[0].name
                 group = Group.objects.get(name=oldGroup)
                 person.groups.remove(group)
-                role = form.cleaned_data.get('role')
+                role = form.cleaned_data.get('rol')
+                print(role)
                 group = Group.objects.get(name=role)
+                print(group)
+
                 person.groups.add(group)
                 form.save()
                 messages.info(request, 'Acconunt ' + person.username + " was update")
@@ -143,7 +148,7 @@ def methods(request):
     return render(request, 'agroia/methods.html',context)
 
 
-
+@allowed_users(allow_roles=['Administrator','Contributor'])
 @login_required(login_url='index')
 def method(request):
     form = MethodForm()

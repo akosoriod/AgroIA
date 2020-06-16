@@ -7,6 +7,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="{% static "css/main.css" %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/icon.png' ”%}" type=”image/x-icon” />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -16,7 +17,7 @@
 
 {%  include 'agroia/navbar.html' %}
 
-<div class="container" style="min-height: 700px">
+<div class="container" style="min-height: 700px; margin-top:20px !important">
       {% block content%}
       {% endblock %}
 </div>
