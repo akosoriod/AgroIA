@@ -119,8 +119,21 @@ main {
   img.logo {
       position: relative;
       top: 10px;
-      height: 40px;
-      left: -40%;
+      height: 64px !important;
+      width: 64px !important;
+      left: -60%;
       z-index: 3;
+  }
+  img.logoName {
+      position: relative;
+      left: -30px;
+      top: -50px;
+      height: 37px !important;
+      width: 116px !important;
+      z-index: 3;
+  }
+  img{
+  height: 200px !important;
+  width: 200px !important;
   }
 }
