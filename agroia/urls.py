@@ -14,6 +14,7 @@ urlpatterns = [
     path('result/<str:pk_t>/', views.result, name="result"),
     path('files/', views.files, name='files'),
     path('method/', views.method, name='method'),
+    path('methods/', views.methods, name='methods'),
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,46 @@
+{% extends 'agroia/main.html'%}
+{% load static %}
+{% block content%}
+
+{% if messages %}
+  {% for message in messages %}
+  <div class="col s8 offset-s2 m6 offset-m3 materialert {{message.tags}}">
+      <div class="material-icons">{{message.tags}}_outline</div>
+      {{message}}
+  </div>
+  {% endfor%}
+{% endif %}
+
+<div class="center-align">
+  <div class="left align">
+    <H4>Files Panel</H4>
+  </div>
+  <div class="right align">
+    <a href="{% url 'dashboard' %}" style="margin: 10px;" title="Back" class="btn btn-floating  btn-large waves-effect waves-light ">
+      <i class="material-icons">keyboard_arrow_left</i>
+      </a>
+  </div>
+  <table class="centered responsive-table">
+    <thead>
+      <tr>
+          <th>Name</th>
+          <th>Detail</th>
+          <th>Date</th>
+          <th>Download</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for item in methods %}
+        <tr>
+          <td>{{item.title }}</td>
+          <td>{{item.detail}}</td>
+          <td>{{item.date_upload }}</td>
+          <td><a href="{{item.file.url}}" title="result" class="waves-effect waves-light btn-small"><i class="material-icons">arrow_drop_down</i></a></td>
+        </tr>
+       {% endfor%}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

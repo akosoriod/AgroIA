@@ -1,14 +1,14 @@
 nav {
-  background-color: #60756A  !important;
+  background-color: #377659  !important;
 }
 img.logo {
     position: relative;
-    top: 20px;
+    top: 2px;
     left: 10px;
     z-index: 3;
 }
 footer {
-  background-color: #60756A  !important;
+  background-color: #377659  !important;
 
 }
 
@@ -20,6 +20,9 @@ body {
 
 main {
   flex: 1 0 auto;
+}
+.sbt {
+  font-weight: lighter;
 }
 .ctitle {
   font-size: 100%;
@@ -38,7 +41,7 @@ main {
   vertical-align: top !important;
 }
 .card {
-  background-color: #3D7557  !important;
+  background-color: #377659  !important;
 }
 .card p {
   color: white !important;
@@ -108,9 +111,9 @@ main {
 @media screen and (max-width: 600px) {
   img.logo {
       position: relative;
-      top: 20px;
-      height: 15px;
-      left: -50%;
+      top: 10px;
+      height: 40px;
+      left: -40%;
       z-index: 3;
   }
 }

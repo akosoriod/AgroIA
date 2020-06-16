@@ -8,7 +8,7 @@ from django.contrib import messages
 from .forms import *
 from .decorators import *
 from .models import *
-
+from django.conf import os
 
 
 
@@ -100,7 +100,16 @@ def estimate(request):
             item.image.name=form.cleaned_data.get('title')
             item.upload_by=request.user
             id_method = form.cleaned_data.get('met')
-            item.method = Method.objects.get(id=id_method)
+            method=Method.objects.get(id=id_method)
+            item.method = method
+            item.save()
+            os.system('cd ./media/methods/'+method.title+"_Folder/" +' && '
+            + method.command +' ../../..'+item.image.url +' && '
+            + 'cp result.jpg '+'../../..'+item.image.url+'_Result.jpg && '
+            + 'cp result.txt '+'../../..'+item.image.url+'_Result.txt '
+            +' && rm result.jpg && rm result.txt')
+            item.image_result = item.image.url+'_Result.jpg'
+            item.txt_result = item.image.url+'_Result.txt'
             item.save()
             pk = item.id
             return redirect('result',pk)
@@ -110,11 +119,15 @@ def estimate(request):
 
 @login_required(login_url='index')
 def result(request,pk_t):
-    try:
-        item = Item.objects.get(id = pk_t)
-    except:
-        messages.error(request, 'Item not found')
-    context = {'item':item}
+    #try:
+    item = Item.objects.get(id = pk_t)
+    #f = open(item.txt_result, 'r')
+    f = open('media/crops/Lettuces_Result.txt', 'r')
+    txt_result = f.read()
+    f.close()
+    #except:
+    #    return HttpResponse('<h1>Item not found</h1>')
+    context = {'item':item,'txt_result':txt_result}
     return render(request,'agroia/result.html',context)
 
 @login_required(login_url='index')
@@ -122,6 +135,13 @@ def files(request):
     items = Item.objects.filter(upload_by=request.user.id)
     context = {'items':items}
     return render(request, 'agroia/files.html',context)
+
+@login_required(login_url='index')
+def methods(request):
+    methods = Method.objects.all()
+    context = {'methods':methods}
+    return render(request, 'agroia/methods.html',context)
+
 
 
 @login_required(login_url='index')
